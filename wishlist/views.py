@@ -69,6 +69,8 @@ def login_user(request):
             response = HttpResponseRedirect(reverse("wishlist:show_wishlist")) # membuat response
             response.set_cookie('last_login', str(datetime.datetime.now())) # membuat cookie last_login dan menambahkannya ke dalam response
             return response
+        else:
+            messages.info(request, 'Username atau Password salah!')
     context = {}
     return render(request, 'login.html', context)
 
