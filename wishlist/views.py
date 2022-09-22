@@ -25,7 +25,6 @@ def show_wishlist(request):
     'list_barang': data_barang_wishlist,
     'nama': 'Akbar Firdaus',
     'list_barang': data_barang_wishlist,
-    'nama': 'Kak Cinoy',
     'last_login': request.COOKIES['last_login'],
     }
     return render(request, "wishlist.html", context)
