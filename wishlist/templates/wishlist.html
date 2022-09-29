@@ -1,27 +1,60 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h5>Nama: </h5>
-<p>{{nama}}</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navigation bar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="#">Hello, {{nama}}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'wishlist:logout' %}">Logout</a>
+        </li>
+        <!-- <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Hello, {{nama}}</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'wishlist:logout' %}">Logout</a>
+          </div>
+        </li> -->
+      </ul>
+    </div>
+</nav>
 
-<table>
-    <tr>
-    <th>Nama Barang</th>
-    <th>Harga Barang</th>
-    <th>Deskripsi</th>
-    </tr>
-    {% comment %} Tambahkan data di bawah baris ini {% endcomment %}
-    {% for barang in list_barang %}
-    <tr>
-        <th>{{barang.nama_barang}}</th>
-        <th>{{barang.harga_barang}}</th>
-        <th>{{barang.deskripsi}}</th>
-    </tr>
-    {% endfor %}    
-</table>
+<div class="container">
+<h5>Nama: {{nama}}</h5>
 
-<h5>Sesi terakhir login: {{ last_login }}</h5>
+<!-- <p>{{nama}}</p> -->
 
-<button><a href="{% url 'wishlist:logout' %}">Logout</a></button>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nama Barang</th>
+        <th scope="col">Harga Barang</th>
+        <th scope="col">Deskripsi</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for barang in list_barang %}
+        <tr>
+            <th>{{barang.nama_barang}}</th>
+            <th>{{barang.harga_barang}}</th>
+            <th>{{barang.deskripsi}}</th>
+        </tr>
+        {% endfor %} 
+    </tbody>
+  </table>
+  <h5>Sesi terakhir login: {{ last_login }}</h5>
+</div>
+
+<!-- <button><a href="{% url 'wishlist:logout' %}">Logout</a></button> -->
 
 {% endblock content %}
