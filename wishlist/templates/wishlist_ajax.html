@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navigation bar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="#">Hello, {{nama}}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'wishlist:logout' %}">Logout</a>
+        </li> 
+      </ul>
+    </div>
+</nav>
+
+<div class="container">
+<h5>Nama: {{nama}}</h5>
+
+<!-- <p>{{nama}}</p> -->
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nama Barang</th>
+        <th scope="col">Harga Barang</th>
+        <th scope="col">Deskripsi</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for barang in list_barang %}
+        <tr>
+            <th>{{barang.nama_barang}}</th>
+            <th>{{barang.harga_barang}}</th>
+            <th>{{barang.deskripsi}}</th>
+        </tr>
+        {% endfor %} 
+    </tbody>
+  </table>
+  <h5>Sesi terakhir login: {{ last_login }}</h5>
+</div>
+
+<button>Get JSON data</button>
+
+<script>
+
+// Acknowledgement
+// https://www.w3schools.com/jquery/ajax_getjson.asp
+
+$(document).ready(function(){
+  $("button").click(function(){
+    $.get("/wishlist/json/", function(result){
+      for (i = 0; i < result.length; i++){
+        $("div").append(result[i].fields["nama_barang"] + " ");
+        $("div").append("dengan harga " + result[i].fields["harga_barang"] + " ");
+        $("div").append("dengan deskripsi " + result[i].fields["deskripsi"] + " | ");
+      };
+    });
+    });
+  });
+;
+</script>
+
+<!-- <button><a href="{% url 'wishlist:logout' %}">Logout</a></button> -->
+
+{% endblock content %}
